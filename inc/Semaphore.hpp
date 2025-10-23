@@ -7,37 +7,12 @@
 class Semaphore
 {
 public:
-    explicit Semaphore(bool initial = false) : up_(initial) {}
+    explicit Semaphore(bool initial = false);
 
-    void raise()
-    {
-        {
-            std::lock_guard<std::mutex> lock(mtx_);
-            up_ = true;
-        }
-        cv_.notify_one();
-    }
-
-    void lower()
-    {
-        {
-            std::lock_guard<std::mutex> lock(mtx_);
-            up_ = false;
-        }
-        cv_.notify_one();
-    }
-
-    void wait_up()
-    {
-        std::unique_lock<std::mutex> lock(mtx_);
-        cv_.wait(lock, [this]() { return up_; });
-    }
-
-    void wait_down()
-    {
-        std::unique_lock<std::mutex> lock(mtx_);
-        cv_.wait(lock, [this]() { return !up_; });
-    }
+    void raise();
+    void lower();
+    void wait_up();
+    void wait_down();
 
 private:
     std::mutex mtx_;
