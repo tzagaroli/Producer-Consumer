@@ -10,17 +10,12 @@ Mailbox::~Mailbox()
 
 void Mailbox::postMessage(int message)
 {
-    semaphore_.wait_down();
     message_ = message;
-    semaphore_.raise();
 }
 
 int Mailbox::retrieveMessage()
 {
-    semaphore_.wait_down();
-    int message = message_;
-    semaphore_.raise();
-    return message;
+    return message_;
 }
 
 Semaphore& Mailbox::getSemaphore()

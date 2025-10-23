@@ -10,12 +10,14 @@ Mailman::Mailman(Mailbox& mailbox, cANSI_t ansi)
 void Mailman::work()
 {
     int message = 0;
+    
     while (true)
     {
-        int sleepDuration = utils::random_int(1000, 5000);
-        utils::sleep_ms(std::chrono::milliseconds(sleepDuration));
-        postMessage(message++);
+        postMessage(++message);
         std::cout << ansi_ << "Mailman sent message: " << message << ansi::reset << std::endl;
+        
+        int sleepDuration = utils::random_int(1000, 3000);
+        utils::sleep_ms(std::chrono::milliseconds(sleepDuration));
     }
 }
 

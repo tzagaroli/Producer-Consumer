@@ -5,7 +5,6 @@
 Semaphore::Semaphore(bool initial) : up_(initial)
 {
     print_state();
-    cv_.notify_all();
 }
 
 void Semaphore::raise()
@@ -38,7 +37,6 @@ void Semaphore::wait_down()
 
 void Semaphore::print_state()
 {
-    std::lock_guard<std::mutex> lock(mtx_);
     if (up_)
     {
         std::cout << "Semaphore is UP" << std::endl;

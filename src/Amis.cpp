@@ -8,13 +8,14 @@ Amis::Amis(Mailbox& mailbox, cANSI_t ansi)
 }
 
 void Amis::work()
-{
+{    
     while (true)
     {
-        int sleepDuration = utils::random_int(1000, 5000);
-        utils::sleep_ms(std::chrono::milliseconds(sleepDuration));
         int message = retrieveMessage();
         std::cout << ansi_ << "Amis received message: " << message << ansi::reset << std::endl;
+        
+        int sleepDuration = utils::random_int(1000, 3000);
+        utils::sleep_ms(std::chrono::milliseconds(sleepDuration));
     }
 }
 
