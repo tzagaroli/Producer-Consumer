@@ -15,6 +15,8 @@ public:
     void wait_down();
 
 private:
+    void print_state();
+
     std::mutex mtx_;
     std::condition_variable cv_;
     bool up_ = false;

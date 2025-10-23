@@ -1,13 +1,21 @@
-#include <iostream>
-#include "utils/ANSI.hpp"
-#include "utils/Sleep.hpp"
-#include "utils/Random.hpp"
+#include <thread>
+
+#include <Mailbox.hpp>
+#include <Amis.hpp>
+#include <Mailman.hpp>
 
 int main()
 {
-    std::cout << "Hello, " << std::flush;
-    utils::sleep_ms(std::chrono::milliseconds(1000));
-    std::cout << "World!" << std::endl;
-    std::cout << "Random: " << utils::random_int(1, 1000) << std::endl;
+    Mailbox mailbox;
+    Amis amis(mailbox, ansi::bright_cyan);
+    Mailman mailman(mailbox, ansi::bright_magenta);
+
+    std::thread amisThread(&Amis::work, &amis);
+    std::thread mailmanThread(&Mailman::work, &mailman);
+
+    while (true)
+    {
+    }
+
     return 0;
 }
