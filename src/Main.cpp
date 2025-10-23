@@ -1,8 +1,11 @@
 #include <iostream>
 #include "utils/ANSI.hpp"
+#include "utils/Sleep.hpp"
 
 int main()
 {
-    std::cout << ansi::blue << ansi::bg_bright_white << "Hello, World!" << ansi::reset << std::endl;
+    std::cout << "Hello, " << std::flush;
+    utils::sleep_ms(std::chrono::milliseconds(10000));
+    std::cout << "World!" << std::endl;
     return 0;
 }
